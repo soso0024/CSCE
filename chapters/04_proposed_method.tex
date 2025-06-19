@@ -3,7 +3,7 @@ The core idea of the proposed method is to reduce input token counts in LLM-base
 \begin{enumerate}
     \item \textbf{Removal of in-code documentation of functions} (referred to as Docstrings in this study)
 \vspace{0.2cm}
-    \item \textbf{Natural language compression using LLMLingua-2}: applied to both prompts and Docstrings, to retain meaningful information while minimizing token count.
+    \item \textbf{Natural language compression using LLMLingua-2}: applied to both prompts and docstrings, to retain meaningful information while minimizing token count.
 \end{enumerate}
 
 \subsection{Role of LLMs in Test Case Generation}
@@ -19,7 +19,7 @@ In this study, we adopt Claude 3.7 Sonnet, Gemini 2.5 Pro Preview, GPT-4.1 as LL
 \begin{enumerate}
     \item All three models are offered by the top three vendors listed on Galileo's Agent Leaderboard on Hugging Face \cite{agent_leaderboard}. We selected the top-performing model from each vendor.
 \vspace{0.2cm}
-    \item To examine whether the results of the proposed prompt- engineering methods—such as Docstrings removal and natural language compression across different LLMs.
+    \item To examine whether the results of the proposed prompt- engineering methods—such as docstrings removal and natural language compression across different LLMs.
 \end{enumerate}
 
 The dataset used in this study, detailed later, includes functions with frequent cross-module calls, making it challenging for any LLMs to generate correct test code in a single prompt. Post-generation correction and retries are inevitable. As such, an automated framework capable of iterative test generation and error correction is essential.
@@ -36,7 +36,7 @@ To meet this need, we incorporate Cline, an open-source AI agent that facilitate
 \subsection{Prompt-Engineering}
 Prompt-engineering refers to the practice of optimizing the input messages given to LLMs including system instructions, user queries, and contextual information to elicit desired and effective outputs \cite{llmlingua}. In the context of this study, the primary challenge of prompt-engineering is to selectively curate and concisely present the necessary information about the target code to LLMs, without including redundant or irrelevant details.
 
-Traditionally, one might simply feed the entire source code and related documentation into the prompt and instruct LLMs to "generate test code for the given function." However, as discussed in the previous section, such prompts tend to become excessively verbose, leading to inefficiencies in both cost and performance. To address this, our study investigates the effect of reducing non-essential content in prompts—specifically, by removing Docstrings.
+Traditionally, one might simply feed the entire source code and related documentation into the prompt and instruct LLMs to "generate test code for the given function." However, as discussed in the previous section, such prompts tend to become excessively verbose, leading to inefficiencies in both cost and performance. To address this, our study investigates the effect of reducing non-essential content in prompts—specifically, by removing docstrings.
 
 Docstrings are in-code natural language comments that describe what a function or class does and how it should be used. While potentially informative, they may not always contribute directly to generating effective test cases as I described in Section 2. Thus represent an opportunity for prompt reduction.
 
@@ -51,9 +51,9 @@ In addition, all prompts are formatted using Markdown. Previous research has sho
 To reduce prompt length, this study employs LLMLingua-2, a model designed for natural language compression \cite{pan2024llmlingua2datadistillationefficient}. LLMLingua-2 uses a token classifier to iteratively remove low-importance words, allowing it to achieve high compression rates while preserving semantic content. Previous research has shown that at a compression rate of 0.9 corresponding to a 5–10\% reduction in total tokens the performance drop is less than one percentage point. Based on this evidence, we adopt the same compression rate (0.9) in this study.
 
 \subsubsection{Base Model}
-The encoder used for LLMLingua-2 is mbert-base. Given that Docstrings typically consist of a few lines per code and follow standardized formats describing the purpose, parameters, and return values of functions, their lexical and syntactic variation is limited. As such, complex language phenomena requiring large-scale models are not expected to be present, making mbert-base a suitable and lightweight choice for this compression task.
+The encoder used for LLMLingua-2 is mbert-base. Given that docstrings typically consist of a few lines per code and follow standardized formats describing the purpose, parameters, and return values of functions, their lexical and syntactic variation is limited. As such, complex language phenomena requiring large-scale models are not expected to be present, making mbert-base a suitable and lightweight choice for this compression task.
 
-In addition, because Docstrings are short by nature, we did not specify any mandatory tokens to preserve in LLMLingua-2. Specifically, the Tokens\_to\_Preserve parameter was set to an empty set (Ø), and the option to force preservation of tokens containing numeric values was disabled.
+In addition, because docstrings are short by nature, we did not specify any mandatory tokens to preserve in LLMLingua-2. Specifically, the Tokens\_to\_Preserve parameter was set to an empty set (Ø), and the option to force preservation of tokens containing numeric values was disabled.
 
 \subsubsection{Parameter Settings}
 The LLMLingua-2 compression was applied using the following parameters:

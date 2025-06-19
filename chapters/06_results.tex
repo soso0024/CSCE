@@ -39,10 +39,10 @@ Table \ref{table:impact_of_each_method} shows a summary of the performance impac
 \begin{enumerate}
     \item \textbf{LLMs Dependency}
         \begin{itemize}[label={$\bullet$}]
-            \item Claude 3.7 Sonnet and Gemini 2.5 Pro Preview rely heavily on Docstrings for code understanding. Removing them leads to more correction requests.
+            \item Claude 3.7 Sonnet and Gemini 2.5 Pro Preview rely heavily on docstrings for code understanding. Removing them leads to more correction requests.
             \vspace{0.2cm}
             
-            \item GPT-4.1 shows low dependence on Docstrings and may even treat them as a source of noise.
+            \item GPT-4.1 shows low dependence on docstrings and may even treat them as a source of noise.
         \end{itemize}
 \vspace{0.3cm}
 
@@ -105,9 +105,9 @@ Table \ref{table:impact_of_each_method} shows a summary of the performance impac
 
 
 \subsection{Impact of Docstrings}
-Fig.\ref{fig:token_usage_comparison} shows token usage statistics—mean, variance, minimum, and maximum—comparing the Base Method and Proposed Method 1 (Docstrings removed). For Claude 3.7 Sonnet, removing Docstrings reduces the variability in token counts, indicating more stable outputs without in-code descriptions. In contrast, Gemini 2.5 Pro Preview and GPT-4.1 show little change in variability, whether Docstrings are present or not.
+Fig.\ref{fig:token_usage_comparison} shows token usage statistics—mean, variance, minimum, and maximum—comparing the Base Method and Proposed Method 1 (docstrings removed). For Claude 3.7 Sonnet, removing docstrings reduces the variability in token counts, indicating more stable outputs without in-code descriptions. In contrast, Gemini 2.5 Pro Preview and GPT-4.1 show little change in variability, whether docstrings are present or not.
 
-Fig.\ref{fig:variablity_comparison} presents the coefficient of variation (CV), which normalizes spread relative to scale. CV can calculated by standard deviation ($\sigma$) divided by the mean ($\mu$) as shown below. Here, Claude’s coefficient jumps significantly when Docstrings are omitted, revealing its strong dependence on Docstrings for consistent code comprehension. Meanwhile, Gemini 2.5 Pro Preview and GPT-4.1 maintain low and nearly identical coefficients across both conditions, suggesting that Docstrings have minimal impact on their understanding and output stability.
+Fig.\ref{fig:variablity_comparison} presents the coefficient of variation (CV), which normalizes spread relative to scale. CV can calculated by standard deviation ($\sigma$) divided by the mean ($\mu$) as shown below. Here, Claude’s coefficient jumps significantly when docstrings are omitted, revealing its strong dependence on docstrings for consistent code comprehension. Meanwhile, Gemini 2.5 Pro Preview and GPT-4.1 maintain low and nearly identical coefficients across both conditions, suggesting that docstrings have minimal impact on their understanding and output stability.
 
 \[
 \mathrm{CV} = \frac{\sigma}{\mu}
