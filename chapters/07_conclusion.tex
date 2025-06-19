@@ -1,4 +1,4 @@
-This study confirmed that prompt-engineering can meaningfully reduce cost of LLM-based automated test case generation while maintaining perfect effectiveness.
+This study confirmed that prompt-engineering can meaningfully reduce API costs of LLM-based automated test case generation while keeping 100\% code coverage.
 
 \begin{enumerate}
     \item \textbf{Docstrings removal} reduced tokens and cost for GPT-4.1 (–17\% tokens, –12.8\% cost) but raised both metrics for Claude 3.7 Sonnet and Gemini 2.5 Pro Preview, revealing model-specific dependence on in-code documentation.
@@ -12,4 +12,6 @@ This study confirmed that prompt-engineering can meaningfully reduce cost of LLM
 
 % volatile: 不安定な
 
-These findings demonstrate that prompt-size control, particularly via lightweight compression, can make large-scale automated test case generation economically sustainable. Practitioners should start with compression, assess each model’s sensitivity to documentation, and escalate to more aggressive reductions only when coverage and stability stay intact.
+These findings reveal that the need for docstrings depends on the model and demonstrate that prompt-engineering can deliver predictable cost saving, advancing the deployment of economical LLM-based test case generation.
+
+% These findings demonstrate that prompt-size control, particularly via lightweight compression, can make large-scale automated test case generation economically sustainable. Practitioners should start with compression, assess each model’s sensitivity to documentation, and escalate to more aggressive reductions only when coverage and stability stay intact.
