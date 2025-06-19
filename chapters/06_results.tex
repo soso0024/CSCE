@@ -1,0 +1,132 @@
+Tables \ref{table:results_base}–\ref{table:results_llmlingua} show the raw outcomes for the base method and the three proposed method. 
+
+\input{chapters/90_results_table}
+% \input{chapters/91_results_imgs}
+\newpage
+
+\subsection{Quantitative Comparison about Token Counts and API Costs, Number of Requests}
+
+Table \ref{table:quantitative_comparison} shows the difference (\%) from the base method calculated based on the average values in Table \ref{table:results_base}-\ref{table:results_llmlingua}. PM means Proposed Method.
+
+\begin{table}[h!]
+    \centering
+    \caption{Change Rates of LLM Performance Metrics (Relative to Base Method)}
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{LLMs} & \textbf{Metrics} \quad & \textbf{Base Method} & \textbf{PM1} & \textbf{PM2} \\
+        \midrule
+        \multirow{3}{*}{Claude 3.7 Sonnet} 
+          & Tokens & 475{,}800 & \quad +18.4\% & \quad $-1.2$\% \\
+          & Cost   & \$0.502 & \quad +8.6\% & \quad $-6.8$\% \\
+          & Req.   & 16.8 & \quad +2.6 & \quad +0.2 \\
+        \midrule
+        \multirow{3}{*}{Gemini 2.5 Pro Preview} 
+          & Tokens & 465{,}100 & \quad +8.4\% & \quad +5.2\% \\
+          & Cost   & \$0.377 & \quad +26.2\% & \quad +23.3\% \\
+          & Req.   & 17.2 & \quad +2.0 & \quad +0.7 \\
+        \midrule
+        \multirow{3}{*}{GPT-4.1} 
+          & Tokens & 393{,}200 & \quad $-17.0$\% & \quad +3.1\% \\
+          & Cost   & \$0.258 & \quad $-12.8$\% & \quad +0.4\% \\
+          & Req.   & 14.8 & \quad $-0.8$ & \quad +0.8 \\
+        \bottomrule
+    \end{tabular}
+    \label{table:quantitative_comparison}
+\end{table}
+
+Table \ref{table:impact_of_each_method} shows a summary of the performance impact of each proposed method from Table \ref{table:quantitative_comparison}. From Table \ref{table:impact_of_each_method}, we can see these things:
+
+\begin{enumerate}
+    \item \textbf{LLMs Dependency}
+        \begin{itemize}[label={$\bullet$}]
+            \item Claude 3.7 Sonnet and Gemini 2.5 Pro Preview rely heavily on Docstrings for code understanding. Removing them leads to more correction requests.
+            \vspace{0.2cm}
+            
+            \item GPT-4.1 shows low dependence on Docstrings and may even treat them as a source of noise.
+        \end{itemize}
+\vspace{0.3cm}
+
+    \item \textbf{LLMLingua-2 Compression as a “Safe Option”}
+        \begin{itemize}[label={$\bullet$}]
+            \item Produced the best results with Claude 3.7 Sonnet. With Gemini 2.5 Pro Preview and GPT-4.1, the changes were minor, and the quality (Req) was largely maintained.
+            \vspace{0.2cm}
+            
+            \item Since there’s little risk of degradation, it is effective as a general-purpose prompt-engineering strategy for reducing API costs.
+        \end{itemize}
+\end{enumerate}
+
+\begin{table}[ht]
+  \centering
+  \caption{Impact of Each Method on Token Usage, Cost, and Request Count (relative to base method)}
+  \setlength{\tabcolsep}{8pt}         % horizontal padding per column
+  \begin{tabularx}{\linewidth}{@{}l L L@{}}  % ← Y → L
+    \toprule
+    \textbf{LLMs} &
+    \thead{PM 1\\Docstrings Removal} &
+    \thead{PM 2\\LLMLingua-2 Compression} \\
+    \midrule
+    Claude &
+    \hspace{1.8cm} \makecell[l]{
+      $\times$ Tokens/ Cost/ Req \textbf{increase}\\[2pt]
+      $\Rightarrow$ All metrics degraded
+    } &
+    \hspace{2.0cm} \makecell[l]{
+      $\bigcirc$ Tokens $-1.2\%$\\
+      $\bigcirc$ Cost $-6.8\%$\\
+      $\triangle$ Req $\approx$ unchanged\\[2pt]
+      $\Rightarrow$ \textbf{lowest cost}
+    } \\
+    \addlinespace[4pt]
+    \midrule[0.2pt] 
+    Gemini &
+    \hspace{1.8cm} \makecell[l]{
+      $\times$ All metrics degraded
+    } &
+    \hspace{2.0cm} \makecell[l]{
+      $\times$ All metrics degraded
+    } \\
+    \addlinespace[4pt]
+    \midrule[0.2pt] 
+    GPT-4.1 &
+    \hspace{1.8cm} \makecell[l]{
+      $\bigcirc$ Tokens $-17\%$\\
+      $\bigcirc$ Cost $-12.8\%$\\
+      $\bigcirc$ Req slightly \textbf{reduce}\\[2pt]
+      $\Rightarrow$ \textbf{overall best} for GPT-4.1
+    } &
+    \hspace{2.0cm} \makecell[l]{
+      $\triangle$ Roughly identical to \\ \hspace{0.5cm}base method
+    } \\
+    \bottomrule
+  \end{tabularx}
+  \label{table:impact_of_each_method}
+\end{table}
+
+
+\subsection{Code Coverage}
+Under all conditions, the generated test cases achieved 100\% code coverage, as measured using the Pytest library. This result indicates that, at least for the dataset used in this study, neither the presence nor absence of natural language information—nor its compression—affected the final coverage.
+
+\subsection{Impact of Docstrings}
+Figure \ref{fig:token_usage_comparison} shows token usage statistics—mean, variance, minimum, and maximum—comparing the Base Method and Proposed Method 1 (Docstrings removed). For Claude 3.7 Sonnet, removing Docstrings reduces the variability in token counts, indicating more stable outputs without in-code descriptions. In contrast, Gemini 2.5 Pro Preview and GPT-4.1 show little change in variability, whether Docstrings are present or not.
+
+Figure \ref{fig:variablity_comparison} presents the coefficient of variation (CV), which normalizes spread relative to scale. CV can calculated by standard deviation ($\sigma$) divided by the mean ($\mu$) as shown below. Here, Claude’s coefficient jumps significantly when Docstrings are omitted, revealing its strong dependence on Docstrings for consistent code comprehension. Meanwhile, Gemini 2.5 Pro Preview and GPT-4.1 maintain low and nearly identical coefficients across both conditions, suggesting that Docstrings have minimal impact on their understanding and output stability.
+
+\[
+\mathrm{CV} = \frac{\sigma}{\mu}
+\]
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\linewidth]{imgs/eps/token_usage_comparison.eps}
+    \caption{Token Usage Comparison: Mean Values with Standard Deviation}
+    \label{fig:token_usage_comparison}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\linewidth]{imgs/eps/variability_comparison.eps}
+    \caption{Variability Comparison: Coefficient of Variation}
+    \label{fig:variablity_comparison}
+\end{figure}

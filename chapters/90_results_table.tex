@@ -1,0 +1,87 @@
+\begin{table}[htbp]
+  \centering
+  \caption{Token usage, API cost, and request count - Base Method}
+  \begin{tabular}{
+      l
+      c@{\hspace{0.5em}}c@{\hspace{0.5em}}c@{\hspace{1em}}   % Claude   : Tokens ⟶ gap ⟶ Cost, Req.
+      c@{\hspace{0.5em}}c@{\hspace{0.5em}}c@{\hspace{1em}}   % Gemini   : Tokens ⟶ gap ⟶ Cost, Req.
+      c@{\hspace{0.5em}}c@{\hspace{0.5em}}c   % GPT-4.1 : Tokens ⟶ gap ⟶ Cost, Req.
+    }
+    \toprule
+          & \multicolumn{3}{c}{Claude 3.7 Sonnet}
+          & \multicolumn{3}{c}{Gemini 2.5 Pro Preview}
+          & \multicolumn{3}{c}{GPT-4.1} \\
+    \cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+    Run & Tokens & Cost(USD) & Req. & Tokens & Cost(USD) & Req. & Tokens & Cost(USD) & Req. \\
+    \midrule
+    1 & 427\,000 & 0.418 & 16 & 353\,000 & 0.363 & 14 & 319\,000 & 0.230 & 13 \\
+    2 & 559\,000 & 0.672 & 19 & 643\,000 & 0.457 & 22 & 454\,000 & 0.313 & 14 \\
+    3 & 370\,000 & 0.381 & 14 & 498\,000 & 0.410 & 18 & 374\,000 & 0.236 & 15 \\
+    4 & 436\,000 & 0.404 & 16 & 340\,000 & 0.285 & 14 & 433\,000 & 0.267 & 17 \\
+    5 & 587\,000 & 0.635 & 19 & 491\,500 & 0.371 & 18 & 386\,000 & 0.246 & 15 \\
+    \midrule
+    Average\hspace{0.5em} & 475\,800 & 0.502 & 16.8 & 465\,100 & 0.3772 & 17.2 & 393\,200 & 0.258 & 14.8 \\
+    \bottomrule
+  \end{tabular}
+  \label{table:results_base}
+\end{table}
+
+
+
+\begin{table}[htbp]
+  \centering
+  \caption{Token usage, API cost, and request count - Proposed Method 1}
+  \begin{tabular}{
+      l
+      c@{\hspace{0.5em}}c@{\hspace{0.5em}}c@{\hspace{1em}}   % Claude   : Tokens ⟶ gap ⟶ Cost, Req.
+      c@{\hspace{0.5em}}c@{\hspace{0.5em}}c@{\hspace{1em}}   % Gemini   : Tokens ⟶ gap ⟶ Cost, Req.
+      c@{\hspace{0.5em}}c@{\hspace{0.5em}}c                 % GPT-4.1  : Tokens ⟶ gap ⟶ Cost, Req.
+    }
+    \toprule
+          & \multicolumn{3}{c}{Claude 3.7 Sonnet}
+          & \multicolumn{3}{c}{Gemini 2.5 Pro Preview}
+          & \multicolumn{3}{c}{GPT-4.1} \\
+    \cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+    Run & Tokens & Cost(USD) & Req. & Tokens & Cost(USD) & Req. & Tokens & Cost(USD) & Req. \\
+    \midrule
+    1 & 751\,000 & 0.576  & 23 & 682\,000 & 0.780 & 24 & 301\,000 & 0.223 & 13 \\
+    2 & 329\,000 & 0.348  & 14 & 296\,000 & 0.217 & 13 & 296\,000 & 0.217 & 13 \\
+    3 & 546\,000 & 0.503  & 19 & 478\,000 & 0.360 & 19 & 363\,000 & 0.233 & 15 \\
+    4 & 449\,000 & 0.595  & 18 & 485\,333 & 0.452 & 19 & 373\,000 & 0.231 & 16 \\
+    5 & 743\,000 & 0.701  & 23 & 580\,000 & 0.570 & 22 & 300\,000 & 0.223 & 13 \\
+    \midrule
+    Average\hspace{0.5em} & 563\,600 & 0.5446 & 19.4 & 504\,267 & 0.476 & 19.2 & 326\,600 & 0.225 & 14.0 \\
+    \bottomrule
+  \end{tabular}
+  \label{table:results_prompt_only}
+\end{table}
+
+
+
+\begin{table}[htbp]
+  \centering
+  \caption{Token usage, API cost, and request count - Proposed Method 2}
+  \begin{tabular}{
+      l
+      c@{\hspace{0.5em}}c@{\hspace{0.5em}}c@{\hspace{1em}}
+      c@{\hspace{0.5em}}c@{\hspace{0.5em}}c@{\hspace{1em}}
+      c@{\hspace{0.5em}}c@{\hspace{0.5em}}c
+    }
+    \toprule
+          & \multicolumn{3}{c}{Claude 3.7 Sonnet}
+          & \multicolumn{3}{c}{Gemini 2.5 Pro Preview}
+          & \multicolumn{3}{c}{GPT-4.1} \\
+    \cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+    Run & Tokens & Cost(USD) & Req. & Tokens & Cost(USD) & Req. & Tokens & Cost(USD) & Req. \\
+    \midrule
+    1 & 377\,000 & 0.361 & 15 & 350\,000 & 0.395 & 14 & 409\,000 & 0.285 & 16 \\
+    2 & 371\,000 & 0.289 & 15 & 453\,000 & 0.401 & 17 & 312\,000 & 0.195 & 13 \\
+    3 & 561\,000 & 0.494 & 19 & 401\,500 & 0.398 & 16 & 314\,000 & 0.196 & 13 \\
+    4 & 430\,000 & 0.654 & 16 & 677\,000 & 0.621 & 23 & 671\,000 & 0.414 & 23 \\
+    5 & 612\,000 & 0.540 & 20 & 565\,000 & 0.511 & 20 & 321\,000 & 0.204 & 13 \\
+    \midrule
+    Average\hspace{0.5em} & 470\,200 & 0.4676 & 17.0 & 489\,300 & 0.4652 & 17.9 & 405\,400 & 0.259 & 15.6 \\
+    \bottomrule
+  \end{tabular}
+  \label{table:results_llmlingua}
+\end{table}

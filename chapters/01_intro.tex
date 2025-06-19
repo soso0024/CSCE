@@ -1,0 +1,32 @@
+Ensuring software reliability requires rigorous validation with a sufficient number of test cases, yet test case generation consumes about 15\% of developers’ working time and has long been a bottleneck, increasing maintenance overhead and causing schedule delays \cite{a_survey_on_unit_testing_practices_and_problems}. Traditional remedies—such as random testing and exploratory search—have been explored, but they rarely deliver stable, high code coverage.
+
+The recent advent of large language models (LLMs) has changed the landscape: by supplying only source code or specifications, developers can automatically generate test cases that raise coverage while reducing manual effort, drawing rapid attention from both research and industry \cite{no_more_manual_tests?}. In fact, the 2024 Stack Overflow Developer Survey reports that 46.2\% of respondents are interested in introducing AI tools for test code, and more than 80\% believe such tools will be even more integrated into practice by 2025, underscoring the rising expectations for automated test case generation \cite{ai_in_the_development_workflow_interested,ai_tools_next_year}.
+
+Nevertheless, today’s LLM-generated tests still pose quality challenges \cite{the_good_the_bad}: 
+
+\begin{enumerate}[label=(\roman*)]
+    \item Some fail to compile or crash at runtime
+\vspace{0.2cm}
+    \item Many are redundant yet still fall short on coverage
+\vspace{0.2cm}
+    \item The stochastic nature of LLMs leads to output variability and poor reproducibility
+\end{enumerate}
+
+Previous studies focus on that achieving high coverage requires providing the LLMs with large contextual information. Concrete proposals include method slicing, which decomposes complex functions into condition- or feature-level slices and generates test cases for each, and multi-step reasoning that feeds back coverage metrics to iteratively refine the tests; these approaches improve coverage and quality \cite{hits}.
+% concreate: 具体的な
+
+However, these techniques expand the amount of information and the number of tokens turn in the prompt. Then API costs rise nearly linearly with that count. Hence, deploying LLM-based test case generation in real projects demands strategies that controls cost increases caused by prompt bloat while preserving high coverage and quality.
+
+To summarize, the key motivations and challenges addressed in this study are as follows:
+
+\begin{itemize}[label={$\bullet$}]
+    \item \textbf{Test case generation remains costly and time-consuming}: consuming 15\% of developers’ working time and contributing to delays and maintenance overhead.
+    \vspace{0.2cm}
+    
+    \item \textbf{Existing methods to get high coverage}: such as method slicing and iterative feedback using coverage metrics—\textbf{require feeding large contextual information} to the LLMs, leading to prompt bloat.
+    \vspace{0.2cm}
+    
+    \item \textbf{Prompt bloat increases tokens}: which in turn causes higher API costs for LLMs, posing a barrier to practical adoption.
+\end{itemize}
+
+The main contribution of this paper is to demonstrate that natural language compression and Docstrings optimization can significantly reduce tokens and API costs while preserving 100\% code coverage. These results demonstrate that careful prompt-engineering can deliver predictable, low-risk savings, advancing the deployment of economical LLM-based test case generation.

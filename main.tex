@@ -1,0 +1,150 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.21 of 2022/01/12
+%
+\documentclass[runningheads]{llncs}
+%
+\usepackage[T1]{fontenc}
+% T1 fonts will be used to generate the final print and online PDFs,
+% so please use T1 fonts in your manuscript whenever possible.
+% Other font encondings may result in incorrect characters.
+%
+\usepackage{graphicx}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following two lines
+% to display URLs in blue roman font according to Springer's eBook style:
+% \usepackage{color}
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+% \urlstyle{rm}
+%
+
+% 箇条書きで bullet を使用するため
+\usepackage{enumitem}
+\usepackage{amsfonts}
+
+% Table の設定で必要
+\usepackage{booktabs}
+\usepackage{makecell}   % provides \shortstack
+\usepackage{tabularx}      % the X column type
+\renewcommand\arraystretch{1.35}  % taller rows once globally
+
+
+\usepackage[most]{tcolorbox}
+\usepackage{float}
+
+% Table(Change Rates of LLM Performance Metrics (Relative to Base Method)) で必要
+\usepackage{caption}
+\usepackage[margin=1in]{geometry}
+\usepackage{multirow}
+
+
+\usepackage{listings}
+\newtcblisting{promptbox}[2][]{          % #1 extra keys, #2 title text
+  colback=gray!5,
+  colframe=black!75,
+  sharp corners,
+  boxrule=0.8pt,
+  fontupper=\ttfamily\small,
+  listing only,
+  listing engine=listings,
+  breakable,
+  enhanced,                              % enables boxed title tricks
+  title=#2,                              % header text
+  boxed title style={                    % header appearance
+     colback=gray!50,
+     colframe=black!75,
+     sharp corners,
+     boxrule=0.8pt,
+  },
+  attach boxed title to top left={       % pin header to frame
+     xshift=2mm, yshift=-2mm
+  },
+  #1                                     % allow overrides
+}
+
+
+\usepackage{array, tabularx, makecell}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X} % ← 左寄せ X 列
+
+
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+%
+\title{Prompt-Engineering Approaches \\to Reducing Costs in LLM-Based Automated Test Case Generation}
+%
+\titlerunning{Prompt-Engineering Approaches to Reducing Costs in LLM-Based Automated Test Case Generation}
+%
+
+\author{So Onishi\inst{1,2} \and
+Keisuke Kitamura\inst{1,3} \and
+Akihito Kohiga\inst{1,4} \and
+Takahiro Koita\inst{1,5}}
+
+%
+\authorrunning{So Onishi et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{Graduate School of Science and Engineering, \\Doshisha University, Kyotanabe, Kyoto, 619-0394, Japan \and
+% \email{jt-koujm@mail.doshisha.ac.jp} \\
+% \url{https://www.doshisha.ac.jp/en/} \and
+\email{ctwk0154@mail4.doshisha.ac.jp} \and
+\email{ctwn0119@mail4.doshisha.ac.jp} \and
+\email{akohiga@mail.doshisha.ac.jp} \and
+\email{tkoita@mail.doshisha.ac.jp}
+}
+
+%
+\maketitle              % typeset the header of the contribution
+%
+\begin{abstract}
+    \input{chapters/00_abst}
+
+    \keywords{Prompt-Engineering \and Token Reduction \and Natural Language Compression \and API Costs \and Code Documentation(Docstrings).}
+\end{abstract}
+%
+%
+%
+\section{Introduction}
+    \input{chapters/01_intro}
+
+\section{Related Works}
+    \input{chapters/02_related_works}
+
+\section{Objective}
+    \input{chapters/03_objective}
+
+\section{Proposed Method}
+    \input{chapters/04_proposed_method}
+
+\section{Experiment}
+    \input{chapters/05_experiment}
+
+\section{Results}
+    \input{chapters/06_results}
+
+\section{Conclusion}
+    \input{chapters/07_conclusion}
+
+\section{Future Works}
+    \input{chapters/08_future_works}
+
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+% \bibliographystyle{splncs04}
+% \bibliography{references}
+
+\printbibliography
+
+% \section{Appendix}
+%     \input{chapters/09_appendix}
+
+\end{document}
